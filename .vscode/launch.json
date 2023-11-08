@@ -9,9 +9,10 @@
             "name": "Extension",
             "type": "extensionHost",
             "request": "launch",
-            "args": [
-                "--extensionDevelopmentPath=${workspaceFolder}"
-            ]
-        }
+            "runtimeExecutable": "${execPath}",
+            "args": ["--disable-extensions", "--extensionDevelopmentPath=${workspaceFolder}"],
+            "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+            "preLaunchTask": "npm: dev"
+        },
     ]
 }
