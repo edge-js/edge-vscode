@@ -1,0 +1,225 @@
+{
+  "edge_props_serialize": {
+    "prefix": ["props.toAttrs"],
+    "description": "Serialize component props to HTML attributes",
+    "body": [
+      "\\$props.toAttrs()"
+    ]
+  },
+  "edge_props_merge_and_serialize": {
+    "prefix": ["props.merge"],
+    "description": "Merge defaults and serialize props to HTML attributes",
+    "body": [
+      "\\$props.merge([$1]).toAttrs()"
+    ]
+  },
+  "edge_props_only_serialize": {
+    "prefix": ["props.only"],
+    "description": "Serialize selected component props to HTML attributes",
+    "body": [
+      "\\$props.only([$1]).toAttrs()"
+    ]
+  },
+  "edge_props_except_serialize": {
+    "prefix": ["props.except"],
+    "description": "Serialize selected component props to HTML attributes",
+    "body": [
+      "\\$props.except([$1]).toAttrs()"
+    ]
+  },
+  "edge_render_slot": {
+    "prefix": ["slots"],
+    "description": "Render a slot",
+    "body": [
+      "await \\$slots.${1}"
+    ]
+  },
+  "edge_filename_reference": {
+    "prefix": ["filename"],
+    "description": "Path to the current template file",
+    "body": [
+      "\\$filename"
+    ]
+  },
+  "edge_state_reference": {
+    "prefix": ["state"],
+    "description": "Reference template state object",
+    "body": [
+      "state"
+    ]
+  },
+  "edge_caller_reference": {
+    "prefix": ["caller"],
+    "description": "Reference to the caller object",
+    "body": [
+      "\\$caller.${1|filename,line,col|}"
+    ]
+  },
+  "edge_nl2br_helper": {
+    "prefix": ["caller"],
+    "description": "Convert new line to br tags",
+    "body": [
+      "nl2br(html.escape(${1:'${2:contents}'}))"
+    ]
+  },
+  "edge_inspect_helper": {
+    "prefix": ["inspect"],
+    "description": "Inspect value by pretty printing it",
+    "body": [
+      "inspect(${1:value})"
+    ]
+  },
+  "edge_truncate_helper": {
+    "prefix": ["truncate"],
+    "description": "Truncate string after given characters count",
+    "body": [
+      "truncate(${1:value}, ${2:100})"
+    ]
+  },
+  "edge_excerpt_helper": {
+    "prefix": ["excerpt"],
+    "description": "Generate plain text excerpt and truncate after given characters count",
+    "body": [
+      "excerpt(${1:value}, ${2:100})"
+    ]
+  },
+  "edge_html_helpers": {
+    "prefix": ["html"],
+    "description": "Reference to the html helpers",
+    "body": [
+      "html.${1|escape,safe,classNames,attrs|}($2)"
+    ]
+  },
+  "edge_stringify_helper": {
+    "prefix": ["stringify"],
+    "description": "Stringify a value for serialization",
+    "body": [
+      "js.stringify($1)"
+    ]
+  },
+  "edge_camelCase_helper": {
+    "prefix": ["camelCase"],
+    "description": "Convert a string to camelcase",
+    "body": ["camelCase(${1:'${2:value}'})"]
+  },
+  "edge_snakeCase_helper": {
+    "prefix": ["snakeCase"],
+    "description": "Convert a string to snakeCase",
+    "body": ["snakeCase(${1:'${2:value}'})"]
+  },
+  "edge_dashCase_helper": {
+    "prefix": ["dashCase"],
+    "description": "Convert a string to dashCase",
+    "body": ["dashCase(${1:'${2:value}'})"]
+  },
+  "edge_pascalCase_helper": {
+    "prefix": ["pascalCase"],
+    "description": "Convert a string to pascalCase",
+    "body": ["pascalCase(${1:'${2:value}'})"]
+  },
+  "edge_capitalCase_helper": {
+    "prefix": ["capitalCase"],
+    "description": "Convert a string to capitalCase",
+    "body": ["capitalCase(${1:'${2:value}'})"]
+  },
+  "edge_sentenceCase_helper": {
+    "prefix": ["sentenceCase"],
+    "description": "Convert a string to sentenceCase",
+    "body": ["sentenceCase(${1:'${2:value}'})"]
+  },
+  "edge_dotCase_helper": {
+    "prefix": ["dotCase"],
+    "description": "Convert a string to dotCase",
+    "body": ["dotCase(${1:'${2:value}'})"]
+  },
+  "edge_noCase_helper": {
+    "prefix": ["noCase"],
+    "description": "Remove all sort of casing from a string",
+    "body": ["noCase(${1:'${2:value}'})"]
+  },
+  "edge_titleCase_helper": {
+    "prefix": ["titleCase"],
+    "description": "Convert a string to titleCase",
+    "body": ["titleCase(${1:'${2:value}'})"]
+  },
+  "edge_pluralize_helper": {
+    "prefix": ["pluralize"],
+    "description": "Pluralize a word",
+    "body": ["pluralize(${1:value}${2:, optionalCount})"]
+  },
+  "edge_sentence_helper": {
+    "prefix": ["sentence"],
+    "description": "Convert an array to a sentence",
+    "body": ["sentence([${1:'car'}, ${2: 'truck'}, ${3: 'van'}], { separator: ', ', lastSeparator: ', or ' })"]
+  },
+  "edge_prettyMs_helper": {
+    "prefix": ["prettyMs"],
+    "description": "Pretty print milliseconds to human readable string",
+    "body": ["prettyMs(${1:60000})"]
+  },
+  "edge_toMs_helper": {
+    "prefix": ["toMs"],
+    "description": "Convert human readable expression to milliseconds",
+    "body": ["toMs(${1:'1min'})"]
+  },
+  "edge_prettyBytes_helper": {
+    "prefix": ["prettyBytes"],
+    "description": "Pretty print bytes to human readable string",
+    "body": ["prettyBytes(${1:1024})"]
+  },
+  "edge_toBytes_helper": {
+    "prefix": ["toBytes"],
+    "description": "Convert human readable expression to bytes",
+    "body": ["toBytes(${1:'1MB'})"]
+  },
+  "edge_ordinal_helper": {
+    "prefix": ["ordinal"],
+    "description": "Ordinalize a string or a number value",
+    "body": ["ordinal(${1:value})"]
+  },
+  "edge_route_helper": {
+    "prefix": ["route"],
+    "description": "Make URL for a route",
+    "body": ["route('${1:routeName}', [${2:args}])"]
+  },
+  "edge_signed_route_helper": {
+    "prefix": ["signedRoute"],
+    "description": "Make a signed URL for a route",
+    "body": ["signedRoute('${1:routeName}', [${2:args}])"]
+  },
+  "edge_flash_messages_helpers": {
+    "prefix": ["flashMessages"],
+    "description": "Reference to flashMessages object",
+    "body": ["flashMessages.${1|has,get|}(${2:key})"]
+  },
+  "edge_asset_helper": {
+    "prefix": ["asset"],
+    "description": "Get path to a frontend asset",
+    "body": ["asset('${1:filePath}')"]
+  },
+  "edge_csrf_field_helper": {
+    "prefix": ["csrfField"],
+    "description": "Add csrfField input field to form",
+    "body": ["csrfField()"]
+  },
+  "edge_csp_helper": {
+    "prefix": ["cspNonce"],
+    "description": "Add CSP nonce to a script tag",
+    "body": ["cspNonce()"]
+  },
+  "edge_auth_helpers": {
+    "prefix": ["auth"],
+    "description": "Reference to auth object",
+    "body": ["auth.${1|user,isAuthenticated|}"]
+  },
+  "edge_config_helper": {
+    "prefix": ["config"],
+    "description": "Get config value using AdonisJS config provider",
+    "body": ["config('${1:key}')"]
+  },
+  "edge_translation_helper": {
+    "prefix": ["t"],
+    "description": "Translate message using i18n",
+    "body": ["t('${1:key}', ${2:{ $3 \\}})"]
+  }
+}

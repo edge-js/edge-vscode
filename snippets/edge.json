@@ -1,0 +1,160 @@
+{
+  "edge_if": {
+    "prefix": ["if", "eif"],
+    "description": "Edge if conditional",
+    "body": [
+      "@if($1)",
+      "\t${2}",
+      "@end"
+    ]
+  },
+  "edge_elseif": {
+    "prefix": ["elseif"],
+    "description": "Edge else if conditional",
+    "body": [
+      "@elseif($1)",
+      "\t${2}"
+    ]
+  },
+  "edge_else": {
+    "prefix": ["else"],
+    "description": "Edge else conditional",
+    "body": [
+      "@else",
+      "\t${1}"
+    ]
+  },
+  "edge_if_else": {
+    "prefix": ["if-else", "e-if-else"],
+    "description": "Edge if else conditional",
+    "body": [
+      "@if($1)",
+      "\t${2}",
+      "@else",
+      "\t${3}",
+      "@end"
+    ]
+  },
+  "edge_unless": {
+    "prefix": ["unless", "eunless"],
+    "description": "Edge unless conditional",
+    "body": [
+      "@unless($1)",
+      "\t${2}",
+      "@end"
+    ]
+  },
+  "edge_each": {
+    "prefix": ["each"],
+    "description": "Edge each loop",
+    "body": [
+      "@each(${1:item} in ${2:collection})",
+      "\t${3}",
+      "@end"
+    ]
+  },
+  "edge_each_with_index": {
+    "prefix": ["each-index"],
+    "description": "Edge each loop with access to index variable",
+    "body": [
+      "@each((${1:value}, ${2:index}) in ${3:collection})",
+      "\t${4}",
+      "@end"
+    ]
+  },
+  "edge_component": {
+    "prefix": ["component", "ecomponent"],
+    "description": "Edge block component tag",
+    "body": [
+      "@component(${1:'${2:components/${3}}'}${4:, { $5 \\}})",
+      "\t${6}",
+      "@end"
+    ]
+  },
+  "edge_inline_component": {
+    "prefix": ["component-inline", "ecomponent-inline"],
+    "description": "Edge inline component tag",
+    "body": [
+      "@!component(${1:'${2:components/${3}}'}${4:, { $5 \\}})"
+    ]
+  },
+  "edge_component_slot": {
+    "prefix": ["slot", "eslot"],
+    "description": "Edge slot tag",
+    "body": [
+      "@slot('$1')",
+      "\t${2}",
+      "@end"
+    ]
+  },
+  "edge_component_inject": {
+    "prefix": ["inject", "einject"],
+    "description": "Edge inject tag",
+    "body": [
+      "@inject(${1:values})"
+    ]
+  },
+  "edge_eval": {
+    "prefix": ["eval", "eeval"],
+    "description": "Edge eval tag",
+    "body": [
+      "@eval(${1:expression})"
+    ]
+  },
+  "edge_new_error": {
+    "prefix": ["newError", "enewError"],
+    "description": "Throw error with stack trace pointing to an Edge template",
+    "body": [
+      "@newError('${1:message}', \\$caller.filename, \\$caller.line, \\$caller.col)"
+    ]
+  },
+  "edge_include": {
+    "prefix": ["include", "einclude"],
+    "description": "Include edge partial",
+    "body": [
+      "@include(${1:'${2:partials/${3}}'})"
+    ]
+  },
+  "edge_conditional_include": {
+    "prefix": ["include-if", "einclude-if"],
+    "description": "Conditionally include edge partial",
+    "body": [
+      "@includeIf(${1:conditional}, ${2:'${3:partials/${4}}'})"
+    ]
+  },
+  "edge_svg_tag": {
+    "prefix": ["svg", "esvg"],
+    "description": "Render SVG icon as a tag",
+    "body": [
+      "@svg('${1}')"
+    ]
+  },
+  "edge_debugger_tag": {
+    "prefix": ["debugger", "edebugger"],
+    "description": "Define debugger breakpoint",
+    "body": [
+      "@debugger"
+    ]
+  },
+  "edge_let_tag": {
+    "prefix": ["let", "elet"],
+    "description": "Define a local variable",
+    "body": [
+      "@let(${1:variableName} = '${2:value}')"
+    ]
+  },
+  "edge_assign_tag": {
+    "prefix": ["assign", "eassign"],
+    "description": "Mutate an existing variable",
+    "body": [
+      "@assign(${1:expression} = '${2:value}')"
+    ]
+  },
+  "edge_vite_tag": {
+    "prefix": ["vite", "evite"],
+    "description": "Reference vite entrypoint file",
+    "body": [
+      "@vite('${1:resources/js/app.js}')"
+    ]
+  }
+}

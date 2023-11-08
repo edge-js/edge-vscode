@@ -1,0 +1,48 @@
+{
+  "name": "vscode-edge",
+  "displayName": "vscode-edge",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "edge",
+        "aliases": [
+          "Edge",
+          "edge"
+        ],
+        "extensions": [
+          ".edge"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "edge",
+        "scopeName": "text.html.edge",
+        "path": "./syntaxes/edge.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.javascript": "javascript"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "edge",
+        "path": "./snippets/edge.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      }
+    ]
+  }
+}
