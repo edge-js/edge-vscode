@@ -1,10 +1,13 @@
 {
   "name": "vscode-edge",
   "displayName": "vscode-edge",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Official Edge template engine extension for VSCode",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"no tests\""
+  },
   "engines": {
-    "vscode": "^1.84.0"
+    "vscode": "^1.80.0"
   },
   "categories": [
     "Programming Languages",
@@ -44,5 +47,21 @@
         "path": "./snippets/javascript.json"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edge-js/edge-vscode.git"
+  },
+  "keywords": [
+    "edgejs",
+    "edge-template-engine",
+    "adonisjs"
+  ],
+  "author": "virk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edge-js/edge-vscode/issues"
+  },
+  "homepage": "https://edgejs.dev/docs/introduction",
+  "pricing": "Free"
 }
