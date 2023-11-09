@@ -1,6 +1,6 @@
 {
   "name": "vscode-edge",
-  "displayName": "vscode-edge",
+  "displayName": "Edge templates syntax highlighter",
   "description": "Official Edge template engine extension for VSCode",
   "version": "1.0.0",
   "scripts": {
