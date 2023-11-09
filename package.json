@@ -63,5 +63,9 @@
     "url": "https://github.com/edge-js/edge-vscode/issues"
   },
   "homepage": "https://edgejs.dev/docs/introduction",
-  "pricing": "Free"
+  "pricing": "Free",
+  "galleryBanner": {
+    "color": "#fff"
+  },
+  "icon": "./marketplace_icon.png"
 }
