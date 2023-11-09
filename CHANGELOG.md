@@ -7,3 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.0
 
 - First official release
+
+## 1.0.1
+
+- Fix tags match regex

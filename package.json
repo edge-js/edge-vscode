@@ -2,7 +2,7 @@
   "name": "vscode-edge",
   "displayName": "Edge templates syntax highlighter",
   "description": "Official Edge template engine extension for VSCode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "test": "echo \"no tests\""
   },
