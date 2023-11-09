@@ -9,6 +9,7 @@
   "engines": {
     "vscode": "^1.80.0"
   },
+  "publisher": "adonisjs",
   "categories": [
     "Programming Languages",
     "Snippets"
