@@ -10,21 +10,21 @@
     "prefix": ["props.merge"],
     "description": "Merge defaults and serialize props to HTML attributes",
     "body": [
-      "\\$props.merge([$1]).toAttrs()"
+      "\\$props.merge({ $1 }).toAttrs()"
     ]
   },
   "edge_props_only_serialize": {
     "prefix": ["props.only"],
     "description": "Serialize selected component props to HTML attributes",
     "body": [
-      "\\$props.only([$1]).toAttrs()"
+      "\\$props.only(['$1']).toAttrs()"
     ]
   },
   "edge_props_except_serialize": {
     "prefix": ["props.except"],
     "description": "Serialize selected component props to HTML attributes",
     "body": [
-      "\\$props.except([$1]).toAttrs()"
+      "\\$props.except(['$1']).toAttrs()"
     ]
   },
   "edge_render_slot": {
@@ -41,13 +41,6 @@
       "\\$filename"
     ]
   },
-  "edge_state_reference": {
-    "prefix": ["state"],
-    "description": "Reference template state object",
-    "body": [
-      "state"
-    ]
-  },
   "edge_caller_reference": {
     "prefix": ["caller"],
     "description": "Reference to the caller object",
@@ -56,7 +49,7 @@
     ]
   },
   "edge_nl2br_helper": {
-    "prefix": ["caller"],
+    "prefix": ["nl2br"],
     "description": "Convert new line to br tags",
     "body": [
       "nl2br(html.escape(${1:'${2:contents}'}))"
@@ -180,7 +173,7 @@
   "edge_route_helper": {
     "prefix": ["route"],
     "description": "Make URL for a route",
-    "body": ["route('${1:routeName}', [${2:args}])"]
+    "body": ["route('${1:routeName}', [${2}])"]
   },
   "edge_signed_route_helper": {
     "prefix": ["signedRoute"],
