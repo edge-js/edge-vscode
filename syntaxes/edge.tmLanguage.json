@@ -85,7 +85,7 @@
       "begin": "^(\\s*)((@{1,2})(!)?([a-zA-Z._]+)(\\s{0,2}))(\\()",
       "beginCaptures": {
         "2": { "name": "support.function.edge" },
-        "3": { "name": "punctuation.paren.open" }
+        "7": { "name": "punctuation.paren.open" }
       },
       "end": "\\)",
       "endCaptures": {
