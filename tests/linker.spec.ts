@@ -2,6 +2,7 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 import dedent from 'dedent'
+import slash from 'slash'
 import { Linker } from '../src/linker'
 import { TemplateIndexer } from '../src/template_indexer'
 
@@ -51,8 +52,8 @@ test.group('Views Linker | .edge', () => {
     const paths = result.map((r) => r.templatePath)
 
     assert.sameDeepMembers(paths, [
-      join(fs.basePath, 'resources/views/components/button.edge'),
-      join(fs.basePath, 'resources/views/layouts/base.edge'),
+      slash(join(fs.basePath, 'resources/views/components/button.edge')),
+      slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
     ])
   })
 
@@ -192,8 +193,8 @@ test.group('Views Linker | .edge', () => {
     const paths = result.map((r) => r.templatePath)
 
     assert.sameDeepMembers(paths, [
-      join(indexer.project.rootPath, 'resources/views/components/button.edge'),
-      join(indexer.project.rootPath, 'resources/views/pages/admin.edge'),
+      slash(join(indexer.project.rootPath, 'resources/views/components/button.edge')),
+      slash(join(indexer.project.rootPath, 'resources/views/pages/admin.edge')),
     ])
   })
 

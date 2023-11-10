@@ -81,7 +81,7 @@ export class TemplateIndexer {
    * Convert the given edge filename to a valid edge Tag Name
    */
   #componentFileNameToTagName(diskPath: string, path: string, disk: string) {
-    const diskComponentsPath = join(diskPath, 'components')
+    const diskComponentsPath = slash(join(diskPath, 'components'))
 
     /**
      * If the file is not located in the disk/components directory, then it's
@@ -121,7 +121,7 @@ export class TemplateIndexer {
         path.startsWith(diskPath)
       )!
 
-      const filename = relative(diskPath, path).replace('.edge', '')
+      const filename = slash(relative(diskPath, path).replace('.edge', ''))
       const name = disk === 'default' ? filename : `${disk}::${filename}`
       const componentName = this.#componentFileNameToTagName(diskPath, path, disk)
 
