@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { join } from 'node:path'
 import { test } from '@japa/runner'
+import slash from 'slash'
 import { TemplateIndexer } from '../src/template_indexer'
 
 test.group('Template indexer | Scan', () => {
@@ -17,14 +18,14 @@ test.group('Template indexer | Scan', () => {
 
     assert.deepEqual(result, [
       {
-        path: join(fs.basePath, 'resources/views/components/button.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/button.edge')),
         name: 'components/button',
         disk: 'default',
         isComponent: true,
         componentName: 'button',
       },
       {
-        path: join(fs.basePath, 'resources/views/layouts/base.edge'),
+        path: slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
         name: 'layouts/base',
         disk: 'default',
         isComponent: false,
@@ -48,28 +49,28 @@ test.group('Template indexer | Scan', () => {
 
     assert.includeDeepMembers(result, [
       {
-        path: join(fs.basePath, 'resources/views/components/button.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/button.edge')),
         name: 'components/button',
         disk: 'default',
         isComponent: true,
         componentName: 'button',
       },
       {
-        path: join(fs.basePath, 'resources/views/layouts/base.edge'),
+        path: slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
         name: 'layouts/base',
         disk: 'default',
         isComponent: false,
         componentName: null,
       },
       {
-        path: join(fs.basePath, 'node_modules/@dimer/components/foo.edge'),
+        path: slash(join(fs.basePath, 'node_modules/@dimer/components/foo.edge')),
         name: 'dimerr::components/foo',
         disk: 'dimerr',
         isComponent: true,
         componentName: 'dimerr.foo',
       },
       {
-        path: join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge'),
+        path: slash(join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge')),
         name: 'dimerr::layouts/foo',
         disk: 'dimerr',
         isComponent: false,
@@ -116,28 +117,28 @@ test.group('Template indexer | Scan', () => {
 
     assert.includeDeepMembers(result, [
       {
-        path: join(fs.basePath, 'resources/views/components/button.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/button.edge')),
         name: 'components/button',
         disk: 'default',
         isComponent: true,
         componentName: 'button',
       },
       {
-        path: join(fs.basePath, 'resources/views/components/button-group.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/button-group.edge')),
         name: 'components/button-group',
         disk: 'default',
         isComponent: true,
         componentName: 'buttonGroup',
       },
       {
-        path: join(fs.basePath, 'resources/views/components/button-group/button.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/button-group/button.edge')),
         name: 'components/button-group/button',
         disk: 'default',
         isComponent: true,
         componentName: 'buttonGroup.button',
       },
       {
-        path: join(fs.basePath, 'resources/views/components/base_test.edge'),
+        path: slash(join(fs.basePath, 'resources/views/components/base_test.edge')),
         name: 'components/base_test',
         disk: 'default',
         isComponent: true,
@@ -159,14 +160,14 @@ test.group('Template indexer | Scan', () => {
 
     assert.includeDeepMembers(result, [
       {
-        path: join(fs.basePath, 'node_modules/@dimer/components/foo.edge'),
+        path: slash(join(fs.basePath, 'node_modules/@dimer/components/foo.edge')),
         name: 'dimerr::components/foo',
         disk: 'dimerr',
         isComponent: true,
         componentName: 'dimerr.foo',
       },
       {
-        path: join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge'),
+        path: slash(join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge')),
         name: 'dimerr::layouts/foo',
         disk: 'dimerr',
         isComponent: false,
