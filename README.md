@@ -14,6 +14,8 @@ This is the official extension for VSCode created by the creators of Edge.js. Th
 
 - Syntax highlighting for both HTML and Edge
 - Code folding for Edge tags
+- "Go To Template" in `.edge` and `.js/.ts` files
+- Auto-completion for components and templates
 - [Tags snippets](#tags-snippets)
 - [Inbuilt helpers snippets](#inbuilt-helpers-snippets)
 - [AdonisJS specific snippets](#adonisjs-specific-snippets)
@@ -22,6 +24,58 @@ This is the official extension for VSCode created by the creators of Edge.js. Th
 > This extension does not perform code formatting.
 >
 > Code formatting with template engine syntax embedded inside HTML is tricky and needs dedicated resources to fight edge cases. We do not have the bandwidth to work on the same right now.
+
+## Configuration
+
+Following is the list of available configuration options :
+
+### `edge.disks`
+
+In order to benefit from autocompletion and Go-To links, the extension needs to know the directories hosting your Edge templates. 
+
+That's what this option is for : it's an object whose keys are the disk names and values the paths to the template directories, relative to the root of your project.
+
+By default, `edge.disk` has this value:
+
+```json
+{
+  "edge.disks": {
+    "default": "resources/views"
+  }
+}
+```
+This is perfectly suited to AdonisJS projects by default.
+
+If you set up a secondary disk with Edge, like this
+```ts
+const BASE_URL = new URL('./', import.meta.url)
+edge.mount('mydisk', new URL('my/sub/directory', BASE_URL))
+```
+
+You can configure the extension as follows:
+
+```json
+{
+  "edge.disks": {
+    "default": "resources/views",
+    "mydisk": "my/sub/directory"
+  }
+}
+```
+
+---
+
+If you are using packages such as `edge-uikit` or `dimerr/docs-theme` which add extra templates, you can configure new disks like this:
+
+```json
+{
+  "edge.disks": {
+    "default": "resources/views",
+    "docs": "node_modules/dimerapp/docs-theme/build/templates",
+    "ui": "node_modules/edge-uikit/build/views"
+  }
+}
+```
 
 ## Tags snippets
 Following is the list of available snippets
