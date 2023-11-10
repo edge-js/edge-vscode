@@ -20,12 +20,8 @@ import { fileSystem } from '@japa/file-system'
 configure({
   ...processCliArgs(process.argv.slice(2)),
   ...{
-    files: ['./test/suites/pure/**/*.spec.ts'],
-    plugins: [
-      assert(),
-      snapshot(),
-      fileSystem(),
-    ],
+    files: ['./tests/**/*.spec.ts'],
+    plugins: [assert(), snapshot(), fileSystem()],
     reporters: [specReporter()],
     importer: (filePath) => import(filePath),
   },
