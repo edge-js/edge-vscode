@@ -23,7 +23,7 @@
     "Programming Languages",
     "Snippets"
   ],
-  "main": "./dist/vscode/index.js",
+  "main": "./dist/index.js",
   "icon": "./marketplace_icon.png",
   "engines": {
     "vscode": "^1.80.0"
