@@ -72,7 +72,9 @@ export class TemplateIndexer {
     }
 
     const globPattern = slash(`${diskDirectoriesPattern}/**/**.edge`)
-    return await fg(globPattern, { onlyFiles: true, caseSensitiveMatch: false })
+    const files = await fg(globPattern, { onlyFiles: true, caseSensitiveMatch: false })
+
+    return files.map((file) => slash(file))
   }
 
   /**
