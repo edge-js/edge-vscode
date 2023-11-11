@@ -17,19 +17,23 @@ export class Linker {
     matchCounts: Record<string, number>,
     lines: string[]
   ) {
-    const matchText = match[1]!
-    if (!matchCounts[matchText]) {
-      matchCounts[matchText] = 0
+    const fullMatch = match[0]!.trim()
+    const templateName = match[2]!
+
+    if (!templateName) return
+
+    if (!matchCounts[fullMatch]) {
+      matchCounts[fullMatch] = 0
     }
 
     let lineIndex = -1
-    for (let i = 0; i <= matchCounts[matchText]!; i++) {
-      lineIndex = lines.findIndex((line, index) => line.includes(matchText) && index > lineIndex)
+    for (let i = 0; i <= matchCounts[fullMatch]!; i++) {
+      lineIndex = lines.findIndex((line, index) => line.includes(fullMatch) && index > lineIndex)
     }
-    const colStart = lines[lineIndex]!.indexOf(matchText)
-    const colEnd = colStart + matchText.length
+    const colStart = lines[lineIndex]!.indexOf(templateName)
+    const colEnd = colStart + templateName.length
 
-    matchCounts[matchText]!++
+    matchCounts[fullMatch]!++
     return { line: lineIndex, colStart, colEnd }
   }
 
@@ -44,7 +48,7 @@ export class Linker {
     const lines = options.fileContent.split('\n')
 
     return matches.map((match) => {
-      const result = options.indexer?.searchComponent(match[1]!, true)
+      const result = options.indexer?.searchComponent(match[2]!, true)
 
       return {
         templatePath: result[0]?.path,
@@ -64,7 +68,7 @@ export class Linker {
     const lines = options.fileContent.split('\n')
 
     return matches.map((match) => {
-      const result = options.indexer?.search(match[1]!)
+      const result = options.indexer?.search(match[2]!)
 
       return {
         templatePath: result?.[0]?.path,

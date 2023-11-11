@@ -278,4 +278,91 @@ test.group('Views Linker | .edge', () => {
 
     assert.deepEqual(result, [])
   })
+
+  test('should match component as tags position correctly when there are multiple matches', async ({
+    assert,
+    fs,
+  }) => {
+    await fs.create('resources/views/components/map/index.edge', '')
+
+    const template = dedent`
+      <div>map</div>
+      map
+
+      @!map()
+    `
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+
+    await indexer.scan()
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'edge',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.deepEqual(positions, [{ colEnd: 5, colStart: 2, line: 3 }])
+  })
+
+  test('should match component as tag position correctly when there are multiple matches', async ({
+    assert,
+    fs,
+  }) => {
+    await fs.create('resources/views/components/button.edge', '')
+
+    const template = dedent`
+      components/button
+
+
+      @component('components/button')
+    `
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+
+    await indexer.scan()
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'edge',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.deepEqual(positions, [{ colEnd: 29, colStart: 12, line: 3 }])
+  })
+
+  test('match template in ts file in correct position', async ({ assert, fs }) => {
+    await fs.create('resources/views/components/button.edge', '')
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+    await indexer.scan()
+
+    const template = dedent`
+      console.log('components/button')
+
+      return view.render('components/button', {
+        props: 42
+      })
+    `
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'ts',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.deepEqual(positions, [{ colEnd: 37, colStart: 20, line: 2 }])
+  })
 })
