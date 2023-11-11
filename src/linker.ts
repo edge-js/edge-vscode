@@ -64,7 +64,7 @@ export class Linker {
     const lines = options.fileContent.split('\n')
 
     return matches.map((match) => {
-      const result = options.indexer?.search(match[2]!)
+      const result = options.indexer?.search(match[2]!, true)
 
       return {
         templatePath: result?.[0]?.path,

@@ -51,11 +51,14 @@ export class TemplateIndexer {
   /**
    * Search for a template by the given text
    */
-  search(text: string) {
+  search(text: string, exact = false) {
     text = text.replaceAll(/"|'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
     if (!text) return this.#templates
 
-    return this.#templates.filter((template) => template.name.startsWith(text))
+    return this.#templates.filter((template) => {
+      if (exact) return template.name === text
+      return template.name.startsWith(text)
+    })
   }
 
   /**
