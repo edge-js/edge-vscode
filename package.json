@@ -2,7 +2,7 @@
   "publisher": "adonisjs",
   "name": "vscode-edge",
   "displayName": "Edge templates syntax highlighter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Official Edge template engine extension for VSCode",
   "author": "virk",
   "license": "MIT",
