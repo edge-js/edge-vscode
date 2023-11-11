@@ -1,4 +1,4 @@
-import { Position, Range } from 'vscode'
+import { CompletionItemKind, Position, Range } from 'vscode'
 import { IndexerManager } from '../indexer_manager'
 import { edgeComponentsAsTagsRegex, viewsCompletionRegex } from '../../regexes'
 import { SuperCompletionItem } from '../wrappers'
@@ -40,7 +40,11 @@ export class EdgeCompletionProvider implements CompletionItemProvider {
     if (componentAsTagRange) {
       const text = doc.getText(componentAsTagRange)
       const items = indexer?.searchComponent(text)?.map(({ componentName, disk }) => {
-        return new SuperCompletionItem({ label: componentName!, detail: disk })
+        return new SuperCompletionItem({
+          label: componentName!,
+          detail: disk,
+          kind: CompletionItemKind.Constructor,
+        })
       })
 
       completionItems.push(...(items ?? []))
