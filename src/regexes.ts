@@ -7,7 +7,7 @@ export const edgeRegex = /(@include|@layout|@!?component)\(['"]([^'"]+)['"]/g
  * Find all components as tags inside an Edge template
  */
 export const edgeComponentsAsTagsRegex =
-  /^[ \t]*(@!?(?!include|set|can|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?)\(.*/gm
+  /^[ \t]*(@!?(?!include|set|can|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+?))\(.*/gm
 
 /**
  * Find all the views that are being used inside a TS/Js file
