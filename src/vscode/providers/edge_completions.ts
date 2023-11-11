@@ -1,6 +1,6 @@
 import { CompletionItemKind, Position, Range } from 'vscode'
 import { IndexerManager } from '../indexer_manager'
-import { edgeComponentsAsTagsRegex, viewsCompletionRegex } from '../../regexes'
+import { edgeComponentsAsTagsCompletionRegex, viewsCompletionRegex } from '../../regexes'
 import { SuperCompletionItem } from '../wrappers'
 import { builtinTags } from '../builtin_tags_completion'
 import type { CompletionItem, CompletionItemProvider, TextDocument } from 'vscode'
@@ -36,7 +36,7 @@ export class EdgeCompletionProvider implements CompletionItemProvider {
     /**
      * Check if we are within a component as tag completion context and return component suggestions if so
      */
-    const componentAsTagRange = doc.getWordRangeAtPosition(pos, edgeComponentsAsTagsRegex)
+    const componentAsTagRange = doc.getWordRangeAtPosition(pos, edgeComponentsAsTagsCompletionRegex)
     if (componentAsTagRange) {
       const text = doc.getText(componentAsTagRange)
       const items = indexer?.searchComponent(text)?.map(({ componentName, disk }) => {

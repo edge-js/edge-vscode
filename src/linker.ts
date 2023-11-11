@@ -1,8 +1,4 @@
-import {
-  edgeComponentsAsTagsCompletionRegex as edgeComponentsRegex,
-  edgeRegex,
-  tsRegex,
-} from './regexes'
+import { edgeComponentsAsTagsRegex, edgeRegex, tsRegex } from './regexes'
 import type { GetLinksOptions } from './types'
 
 /**
@@ -43,7 +39,7 @@ export class Linker {
   static async #getComponentAsTagsLinks(options: GetLinksOptions) {
     if (options.sourceType !== 'edge') return []
 
-    const matches = Array.from(options.fileContent.matchAll(edgeComponentsRegex) || [])
+    const matches = Array.from(options.fileContent.matchAll(edgeComponentsAsTagsRegex) || [])
     const matchCounts: Record<string, number> = {}
     const lines = options.fileContent.split('\n')
 

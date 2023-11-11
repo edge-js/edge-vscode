@@ -7,7 +7,7 @@ export const edgeRegex = /(@include|@layout|@!?component)\(['"]([^'"]+)['"]/g
  * Find all components as tags inside an Edge template
  */
 export const edgeComponentsAsTagsRegex =
-  /@!?(?!include|set|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?\(?/g
+  /^[ \t]*(@!?(?!include|set|can|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?)\(.*/gm
 
 /**
  * Find all the views that are being used inside a TS/Js file
@@ -24,7 +24,7 @@ export const viewsCompletionRegex = /(?<=[@include|@layout|@!component]\()(['"])
  * to suggest completions
  */
 export const edgeComponentsAsTagsCompletionRegex =
-  /^[ \t]*(@!?(?!include|set|can|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?)\(.*/gm
+  /@!?(?!include|set|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?\(?/g
 
 /**
  * Check if we are currently inside a view link and capture the user input to suggest completions
