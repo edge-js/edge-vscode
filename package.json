@@ -87,7 +87,8 @@
     "checks": "npm run lint && npm run typecheck && npm run test",
     "version": "npm run build",
     "test": "c8 ts-node bin/test.ts",
-    "quick:test": "ts-node bin/test.ts"
+    "quick:test": "ts-node bin/test.ts",
+    "vscode:prepublish": "npm run build"
   },
   "devDependencies": {
     "@adonisjs/prettier-config": "^1.1.8",
