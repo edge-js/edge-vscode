@@ -77,6 +77,18 @@ If you are using packages such as `edge-uikit` or `dimerr/docs-theme` which add 
 }
 ```
 
+### Emmet support
+
+If you want to use Emmet in your Edge templates, you can add the following configuration:
+
+```json
+{
+  "emmet.includeLanguages": {
+    "edge": "html"
+  }
+}
+```
+
 ## Tags snippets
 Following is the list of available snippets
 
