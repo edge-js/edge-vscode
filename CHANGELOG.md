@@ -11,3 +11,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.1
 
 - Fix tags match regex
+
+## 1.1.0
+
+- Feat Goto template support
+
+## 1.1.1
+
+- Fix for missing dependencies
