@@ -175,6 +175,37 @@ test.group('Template indexer | Scan', () => {
       },
     ])
   })
+
+  test('components/**/*/index.edge files should be indexed without index.edge suffix', async ({
+    assert,
+    fs,
+  }) => {
+    await fs.create('resources/views/components/button/index.edge', '')
+    await fs.create('resources/views/components/foo/bar/index.edge', '')
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+
+    const result = await indexer.scan()
+    assert.includeDeepMembers(result, [
+      {
+        path: slash(join(fs.basePath, 'resources/views/components/button/index.edge')),
+        name: 'components/button/index',
+        disk: 'default',
+        isComponent: true,
+        componentName: 'button',
+      },
+      {
+        path: slash(join(fs.basePath, 'resources/views/components/foo/bar/index.edge')),
+        name: 'components/foo/bar/index',
+        disk: 'default',
+        isComponent: true,
+        componentName: 'foo.bar',
+      },
+    ])
+  })
 })
 
 test.group('Template indexer | Search', () => {
@@ -292,5 +323,26 @@ test.group('Template indexer | Search', () => {
     assert.deepEqual(results.length, 1)
     assert.deepEqual(results[0]!.name, 'dimerr::components/foo')
     assert.deepEqual(results[0]!.componentName, 'dimerr.foo')
+  })
+
+  test('search index component', async ({ assert, fs }) => {
+    await fs.create('resources/views/components/button/index.edge', '')
+    await fs.create('resources/views/components/foo/bar/index.edge', '')
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+
+    await indexer.scan()
+
+    const fooResult = indexer.searchComponent('foo')
+    const buttonResult = indexer.searchComponent('button')
+
+    assert.deepEqual(fooResult.length, 1)
+    assert.deepEqual(fooResult[0]!.componentName, 'foo.bar')
+
+    assert.deepEqual(buttonResult.length, 1)
+    assert.deepEqual(buttonResult[0]!.componentName, 'button')
   })
 })

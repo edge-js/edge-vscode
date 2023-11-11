@@ -104,6 +104,15 @@ export class TemplateIndexer {
       componentName = `${disk}.${componentName}`
     }
 
+    /**
+     * If the component is something like `button/index.edge`
+     * we should be able to use it as `@!button()` in Edge
+     * So we remove the `.index` part from the component name
+     */
+    if (componentName.endsWith('.index')) {
+      componentName = componentName.replace('.index', '')
+    }
+
     return componentName
   }
 
