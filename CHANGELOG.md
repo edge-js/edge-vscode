@@ -23,3 +23,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.1.2
 
 - Another release fixing missing dependencies
+
+## 1.1.3
+
+- Still another release fixing bundling/missing dependencies
