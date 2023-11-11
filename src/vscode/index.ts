@@ -49,7 +49,9 @@ export async function activate(context: ExtensionContext) {
   const viewsTsLink = languages.registerDocumentLinkProvider(jsSelectors, new TsLinksProvider())
   const viewsCompletion = languages.registerCompletionItemProvider(
     jsSelectors,
-    new TsCompletionProvider()
+    new TsCompletionProvider(),
+    '"',
+    "'"
   )
 
   /**
@@ -58,7 +60,9 @@ export async function activate(context: ExtensionContext) {
   const edgeLinks = languages.registerDocumentLinkProvider(edgeSelector, new EdgeLinksProvider())
   const edgeCompletion = languages.registerCompletionItemProvider(
     edgeSelector,
-    new EdgeCompletionProvider()
+    new EdgeCompletionProvider(),
+    '@',
+    '!'
   )
 
   context.subscriptions.push(viewsCompletion, viewsTsLink, edgeCompletion, edgeLinks)
