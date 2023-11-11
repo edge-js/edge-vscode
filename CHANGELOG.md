@@ -34,3 +34,7 @@ All notable changes to the "vscode-edge" extension will be documented in this fi
 - Before, in order to show completions, you had to press `ctrl+space`. Now, completions will show automatically when you type `@` or `@.`. Same for `.ts` files, when you will start typing `edge.render`, completions will show automatically.
 - Add Edge built-in tags completions with some links to the documentation in the CompletionItem detail.
 - Use different icons for Edge built-in tags and custom tags.
+
+## 1.3.1
+
+- Polishing and fix some issues related to Document Links in .ts and .edge files
