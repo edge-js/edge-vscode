@@ -1,14 +1,16 @@
-import { Range } from 'vscode'
+import { Position, Range } from 'vscode'
 import { IndexerManager } from '../indexer_manager'
 import { edgeComponentsAsTagsRegex, viewsCompletionRegex } from '../../regexes'
 import { SuperCompletionItem } from '../wrappers'
-import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
+import { builtinTags } from '../builtin_tags_completion'
+import type { CompletionItem, CompletionItemProvider, TextDocument } from 'vscode'
 
 /**
  * Responsible for providing components/templates completions in .edge files
  */
 export class EdgeCompletionProvider implements CompletionItemProvider {
   async provideCompletionItems(doc: TextDocument, pos: Position) {
+    let completionItems: CompletionItem[] = []
     const indexer = IndexerManager.getIndexerFromFile(doc.uri.fsPath)
 
     /**
@@ -23,18 +25,27 @@ export class EdgeCompletionProvider implements CompletionItemProvider {
     }
 
     /**
-     * Second view completion context possibility : components as tags. We either check if we are
-     * in a component as tag context or if the last two characters are '@' or '@!'
+     * Check if we are within a tag completion context and return builtin tag suggestions if so
+     */
+    const range = new Range(new Position(pos.line, 0), pos)
+    const tagMatch = doc.getText(range).match(/\s*@(\w*)$/)
+    if (tagMatch) {
+      completionItems = builtinTags.filter((tag) => tag.label.toString().startsWith(tagMatch[1]!))
+    }
+
+    /**
+     * Check if we are within a component as tag completion context and return component suggestions if so
      */
     const componentAsTagRange = doc.getWordRangeAtPosition(pos, edgeComponentsAsTagsRegex)
-    const lastTwoChars = doc.getText(new Range(pos.translate(0, -2), pos))
-
-    if (componentAsTagRange || lastTwoChars.trim() === '@' || lastTwoChars === '@!') {
+    if (componentAsTagRange) {
       const text = doc.getText(componentAsTagRange)
-
-      return indexer?.searchComponent(text)?.map(({ componentName, disk }) => {
+      const items = indexer?.searchComponent(text)?.map(({ componentName, disk }) => {
         return new SuperCompletionItem({ label: componentName!, detail: disk })
       })
+
+      completionItems.push(...(items ?? []))
     }
+
+    return completionItems
   }
 }
