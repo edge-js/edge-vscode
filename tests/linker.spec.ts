@@ -149,55 +149,6 @@ test.group('Views Linker | .edge', () => {
     `)
   })
 
-  test('ts source type', async ({ assert, fs }) => {
-    await fs.create('resources/views/components/button.edge', '')
-    await fs.create('resources/views/pages/admin.edge', '')
-
-    const indexer = new TemplateIndexer({
-      rootPath: fs.basePath,
-      disks: { default: 'resources/views' },
-    })
-    await indexer.scan()
-
-    const template = dedent`
-      return view.render('components/button', {
-        props: 42
-      })
-
-      return view.renderSync('pages/admin', {})
-    `
-
-    const result = await Linker.getLinks({
-      fileContent: template,
-      indexer,
-      sourceType: 'ts',
-    })
-
-    const positions = result.map((r) => r.position)
-
-    assert.snapshot(positions).matchInline(`
-      [
-        {
-          "colEnd": 37,
-          "colStart": 20,
-          "line": 0,
-        },
-        {
-          "colEnd": 35,
-          "colStart": 24,
-          "line": 4,
-        },
-      ]
-    `)
-
-    const paths = result.map((r) => r.templatePath)
-
-    assert.sameDeepMembers(paths, [
-      slash(join(indexer.project.rootPath, 'resources/views/components/button.edge')),
-      slash(join(indexer.project.rootPath, 'resources/views/pages/admin.edge')),
-    ])
-  })
-
   test('should not detect internal tags as components', async ({ assert, fs }) => {
     const template = dedent`
       @if(true)
@@ -339,33 +290,6 @@ test.group('Views Linker | .edge', () => {
     assert.deepEqual(positions, [{ colEnd: 29, colStart: 12, line: 3 }])
   })
 
-  test('match template in ts file in correct position', async ({ assert, fs }) => {
-    await fs.create('resources/views/components/button.edge', '')
-
-    const indexer = new TemplateIndexer({
-      rootPath: fs.basePath,
-      disks: { default: 'resources/views' },
-    })
-    await indexer.scan()
-
-    const template = dedent`
-      console.log('components/button')
-
-      return view.render('components/button', {
-        props: 42
-      })
-    `
-
-    const result = await Linker.getLinks({
-      fileContent: template,
-      indexer,
-      sourceType: 'ts',
-    })
-
-    const positions = result.map((r) => r.position)
-    assert.deepEqual(positions, [{ colEnd: 37, colStart: 20, line: 2 }])
-  })
-
   test('should find link even when the component props include "(" character', async ({
     assert,
     fs,
@@ -391,5 +315,107 @@ test.group('Views Linker | .edge', () => {
 
     const positions = result.map((r) => r.position)
     assert.deepEqual(positions, [{ colEnd: 8, colStart: 2, line: 0 }])
+  })
+})
+
+test.group('Views Linker | .ts', () => {
+  test('ts source type', async ({ assert, fs }) => {
+    await fs.create('resources/views/components/button.edge', '')
+    await fs.create('resources/views/pages/admin.edge', '')
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+    await indexer.scan()
+
+    const template = dedent`
+      return view.render('components/button', {
+        props: 42
+      })
+
+      return view.renderSync('pages/admin', {})
+    `
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'ts',
+    })
+
+    const positions = result.map((r) => r.position)
+
+    assert.snapshot(positions).matchInline(`
+      [
+        {
+          "colEnd": 37,
+          "colStart": 20,
+          "line": 0,
+        },
+        {
+          "colEnd": 35,
+          "colStart": 24,
+          "line": 4,
+        },
+      ]
+    `)
+
+    const paths = result.map((r) => r.templatePath)
+
+    assert.sameDeepMembers(paths, [
+      slash(join(indexer.project.rootPath, 'resources/views/components/button.edge')),
+      slash(join(indexer.project.rootPath, 'resources/views/pages/admin.edge')),
+    ])
+  })
+
+  test('should not mark emails as components', async ({ assert, fs }) => {
+    const template = `
+      router.get('/send-email', async ({ response, session }) => {
+          message.from('jul@adonisjs.com')
+            .text('Hello world')
+            .to('foo@bar.com').subject('My subject')
+      })
+    `
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+    await indexer.scan()
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'ts',
+    })
+
+    assert.deepEqual(result, [])
+  })
+
+  test('match template in ts file in correct position', async ({ assert, fs }) => {
+    await fs.create('resources/views/components/button.edge', '')
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+    await indexer.scan()
+
+    const template = dedent`
+      console.log('components/button')
+
+      return view.render('components/button', {
+        props: 42
+      })
+    `
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'ts',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.deepEqual(positions, [{ colEnd: 37, colStart: 20, line: 2 }])
   })
 })
