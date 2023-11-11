@@ -81,6 +81,9 @@ export class Linker {
     const componentsAsTagsPromise = this.#getComponentAsTagsLinks(options)
 
     const results = await Promise.all([basicLinksPromise, componentsAsTagsPromise])
-    return results.flat().filter((link) => !!link.templatePath)
+    return results.flat().filter((link) => !!link.templatePath && !!link.position) as {
+      templatePath: string
+      position: { line: number; colStart: number; colEnd: number }
+    }[]
   }
 }

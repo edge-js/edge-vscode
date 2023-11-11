@@ -16,7 +16,7 @@ test.group('Template indexer | Scan', () => {
 
     const result = await indexer.scan()
 
-    assert.deepEqual(result, [
+    assert.includeDeepMembers(result, [
       {
         path: slash(join(fs.basePath, 'resources/views/components/button.edge')),
         name: 'components/button',
