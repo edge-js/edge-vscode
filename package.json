@@ -80,7 +80,7 @@
   },
   "scripts": {
     "build": "del-cli dist && tsup",
-    "dev": "tsup src",
+    "dev": "tsup --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
