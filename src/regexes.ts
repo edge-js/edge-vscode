@@ -12,7 +12,7 @@ export const edgeComponentsAsTagsRegex =
 /**
  * Find all the views that are being used inside a TS/Js file
  */
-export const tsRegex = /((?:[Vv]iew|[Ee]dge)\.render(?:Sync)?\(['"](.*)['"])/g
+export const tsRegex = /((?:[Vv]iew|[Ee]dge)\.render(?:Sync)?\(['"](.*?)['"])/g
 
 /**
  * Check if we are currently inside a view link and capture the user input to suggest completions

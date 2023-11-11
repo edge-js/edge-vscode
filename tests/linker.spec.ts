@@ -418,4 +418,31 @@ test.group('Views Linker | .ts', () => {
     const positions = result.map((r) => r.position)
     assert.deepEqual(positions, [{ colEnd: 37, colStart: 20, line: 2 }])
   })
+
+  test('should find link even when the template props include "(" character', async ({
+    assert,
+    fs,
+  }) => {
+    await fs.create('resources/views/components/button.edge', '')
+
+    const template = dedent`
+      return view.render('components/button', { prop: route('bar') })
+    `
+
+    const indexer = new TemplateIndexer({
+      rootPath: fs.basePath,
+      disks: { default: 'resources/views' },
+    })
+
+    await indexer.scan()
+
+    const result = await Linker.getLinks({
+      fileContent: template,
+      indexer,
+      sourceType: 'ts',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.deepEqual(positions, [{ colEnd: 37, colStart: 20, line: 0 }])
+  })
 })
