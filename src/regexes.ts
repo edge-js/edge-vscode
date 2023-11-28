@@ -17,7 +17,7 @@ export const tsRegex = /((?:[Vv]iew|[Ee]dge)\.render(?:Sync)?\(['"](.*?)['"])/g
 /**
  * Check if we are currently inside a view link and capture the user input to suggest completions
  */
-export const viewsCompletionRegex = /(?<=[@include|@layout|@!component]\()(['"])[^'"]*\1/g
+export const viewsCompletionRegex = /(?<=@include\(['"]|@layout\(['"]|@!component\(['"])[^'"]*/g
 
 /**
  * Check if we are currently inside a component as tag and capture the user input
