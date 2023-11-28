@@ -1,30 +1,8 @@
 # Change Log
 
-All notable changes to the "vscode-edge" extension will be documented in this file.
+## 1.3.1
 
-## 1.0.0
-
-- First official release
-
-## 1.0.1
-
-- Fix tags match regex
-
-## 1.1.0
-
-- Feat Goto template support
-
-## 1.1.1
-
-- Fix for missing dependencies
-
-## 1.1.2
-
-- Another release fixing missing dependencies
-
-## 1.2.0
-
-- Still another release fixing bundling/missing dependencies
+- Polishing and fix some issues related to Document Links in .ts and .edge files
 
 ## 1.3.0
 
@@ -35,6 +13,26 @@ All notable changes to the "vscode-edge" extension will be documented in this fi
 - Add Edge built-in tags completions with some links to the documentation in the CompletionItem detail.
 - Use different icons for Edge built-in tags and custom tags.
 
-## 1.3.1
+## 1.2.0
 
-- Polishing and fix some issues related to Document Links in .ts and .edge files
+- Still another release fixing bundling/missing dependencies
+
+## 1.1.1
+
+- Fix for missing dependencies
+
+## 1.1.2
+
+- Another release fixing missing dependencies
+
+## 1.1.0
+
+- Feat Goto template support
+
+## 1.0.1
+
+- Fix tags match regex
+
+## 1.0.0
+
+- First official release
