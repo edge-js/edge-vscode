@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.3.2
+
+- Autocompletion was triggered when using `@section` in `.edge` files
+
 ## 1.3.1
 
 - Polishing and fix some issues related to Document Links in .ts and .edge files
