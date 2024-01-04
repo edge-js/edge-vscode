@@ -23,6 +23,8 @@ test.group('Template indexer | Scan', () => {
         disk: 'default',
         isComponent: true,
         componentName: 'button',
+        selfClosedInsertText: `button(\${1})`,
+        insertText: `button(\${1}) \n\t$0\n@end`,
       },
       {
         path: slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
@@ -30,6 +32,8 @@ test.group('Template indexer | Scan', () => {
         disk: 'default',
         isComponent: false,
         componentName: null,
+        selfClosedInsertText: `null(\${1})`,
+        insertText: `null(\${1}) \n\t$0\n@end`,
       },
     ])
   })
@@ -42,7 +46,7 @@ test.group('Template indexer | Scan', () => {
 
     const indexer = new TemplateIndexer({
       rootPath: fs.basePath,
-      disks: { default: 'resources/views', dimerr: '@dimer' },
+      disks: { default: 'resources/views', dimer: '@dimer' },
     })
 
     const result = await indexer.scan()
@@ -54,6 +58,8 @@ test.group('Template indexer | Scan', () => {
         disk: 'default',
         isComponent: true,
         componentName: 'button',
+        selfClosedInsertText: `button(\${1})`,
+        insertText: `button(\${1}) \n\t$0\n@end`,
       },
       {
         path: slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
@@ -61,20 +67,26 @@ test.group('Template indexer | Scan', () => {
         disk: 'default',
         isComponent: false,
         componentName: null,
+        selfClosedInsertText: `null(\${1})`,
+        insertText: `null(\${1}) \n\t$0\n@end`,
       },
       {
         path: slash(join(fs.basePath, 'node_modules/@dimer/components/foo.edge')),
-        name: 'dimerr::components/foo',
-        disk: 'dimerr',
+        name: 'dimer::components/foo',
+        disk: 'dimer',
         isComponent: true,
-        componentName: 'dimerr.foo',
+        componentName: 'dimer.foo',
+        selfClosedInsertText: `dimer.foo(\${1})`,
+        insertText: `dimer.foo(\${1}) \n\t$0\n@end`,
       },
       {
         path: slash(join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge')),
-        name: 'dimerr::layouts/foo',
-        disk: 'dimerr',
+        name: 'dimer::layouts/foo',
+        disk: 'dimer',
         isComponent: false,
         componentName: null,
+        selfClosedInsertText: `null(\${1})`,
+        insertText: `null(\${1}) \n\t$0\n@end`,
       },
     ])
   })
@@ -115,7 +127,7 @@ test.group('Template indexer | Scan', () => {
 
     const result = await indexer.scan()
 
-    assert.includeDeepMembers(result, [
+    assert.containsSubset(result, [
       {
         path: slash(join(fs.basePath, 'resources/views/components/button.edge')),
         name: 'components/button',
@@ -153,23 +165,23 @@ test.group('Template indexer | Scan', () => {
 
     const indexer = new TemplateIndexer({
       rootPath: fs.basePath,
-      disks: { default: 'resources/views', dimerr: '@dimer' },
+      disks: { default: 'resources/views', dimer: '@dimer' },
     })
 
     const result = await indexer.scan()
 
-    assert.includeDeepMembers(result, [
+    assert.containsSubset(result, [
       {
         path: slash(join(fs.basePath, 'node_modules/@dimer/components/foo.edge')),
-        name: 'dimerr::components/foo',
-        disk: 'dimerr',
+        name: 'dimer::components/foo',
+        disk: 'dimer',
         isComponent: true,
-        componentName: 'dimerr.foo',
+        componentName: 'dimer.foo',
       },
       {
         path: slash(join(fs.basePath, 'node_modules/@dimer/layouts/foo.edge')),
-        name: 'dimerr::layouts/foo',
-        disk: 'dimerr',
+        name: 'dimer::layouts/foo',
+        disk: 'dimer',
         isComponent: false,
         componentName: null,
       },
@@ -189,7 +201,7 @@ test.group('Template indexer | Scan', () => {
     })
 
     const result = await indexer.scan()
-    assert.includeDeepMembers(result, [
+    assert.containsSubset(result, [
       {
         path: slash(join(fs.basePath, 'resources/views/components/button/index.edge')),
         name: 'components/button/index',

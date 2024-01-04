@@ -41,11 +41,6 @@ test.group('Views Linker | .edge', () => {
           "colStart": 13,
           "line": 0,
         },
-        {
-          "colEnd": 21,
-          "colStart": 9,
-          "line": 5,
-        },
       ]
     `)
 
@@ -53,7 +48,6 @@ test.group('Views Linker | .edge', () => {
 
     assert.sameDeepMembers(paths, [
       slash(join(fs.basePath, 'resources/views/components/button.edge')),
-      slash(join(fs.basePath, 'resources/views/layouts/base.edge')),
     ])
   })
 
