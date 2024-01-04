@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./banner.png" />
+  <img src="./banner.jpeg" />
 </div>
 
 <div align="center">
@@ -65,7 +65,7 @@ You can configure the extension as follows:
 
 ---
 
-If you are using packages such as `edge-uikit` or `dimerr/docs-theme` which add extra templates, you can configure new disks like this:
+If you are using packages such as `edge-uikit` or `@dimer/docs-theme` which add extra templates, you can configure new disks like this:
 
 ```json
 {
