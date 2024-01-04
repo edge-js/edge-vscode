@@ -33,6 +33,17 @@ export interface Template {
   disk: string
 
   /**
+   * Text to insert on completion
+   */
+  insertText: string
+
+  /**
+   * Text to insert on completion for a self
+   * closed usage
+   */
+  selfClosedInsertText: string
+
+  /**
    * Whether the template is a component or not ( located in a components/ directory )
    */
   isComponent: boolean

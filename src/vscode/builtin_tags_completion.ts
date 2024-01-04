@@ -70,6 +70,16 @@ componentItem.documentation = new MarkdownString(
 componentItem.detail = 'Render a component'
 
 /**
+ * Self closing `@component`
+ */
+const selfClosingComponentItem = new CompletionItem('component', CompletionItemKind.Keyword)
+selfClosingComponentItem.insertText = new SnippetString("component('${1:componentName}', { $2 })")
+selfClosingComponentItem.documentation = new MarkdownString(
+  'Insert an @component statement\n\nhttps://edgejs.dev/docs/components/introduction'
+)
+selfClosingComponentItem.detail = 'Render a self closing component'
+
+/**
  * `@slot`
  */
 const slotItem = new CompletionItem('slot', CompletionItemKind.Keyword)
@@ -211,3 +221,5 @@ export const builtinTags = [
   layoutItem,
   setItem,
 ]
+
+export const builtinSelfClosingTags = [selfClosingComponentItem]

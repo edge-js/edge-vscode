@@ -1,8 +1,8 @@
 import { CompletionItemKind, Position, Range } from 'vscode'
+import { SuperCompletionItem } from '../wrappers'
 import { IndexerManager } from '../indexer_manager'
 import { edgeComponentsAsTagsCompletionRegex, viewsCompletionRegex } from '../../regexes'
-import { SuperCompletionItem } from '../wrappers'
-import { builtinTags } from '../builtin_tags_completion'
+import { builtinSelfClosingTags, builtinTags } from '../builtin_tags_completion'
 import type { CompletionItem, CompletionItemProvider, TextDocument } from 'vscode'
 
 /**
@@ -28,9 +28,15 @@ export class EdgeCompletionProvider implements CompletionItemProvider {
      * Check if we are within a tag completion context and return builtin tag suggestions if so
      */
     const range = new Range(new Position(pos.line, 0), pos)
-    const tagMatch = doc.getText(range).match(/\s*@(\w*)$/)
+    const text = doc.getText(range)
+    const tagMatch = text.match(/\s*@(\w*)$/)
+    const selfClosingMatch = text.match(/\s*@!(\w*)$/)
     if (tagMatch) {
       completionItems = builtinTags.filter((tag) => tag.label.toString().startsWith(tagMatch[1]!))
+    } else if (selfClosingMatch) {
+      completionItems = builtinSelfClosingTags.filter((tag) =>
+        tag.label.toString().startsWith(selfClosingMatch[1]!)
+      )
     }
 
     /**
@@ -39,15 +45,29 @@ export class EdgeCompletionProvider implements CompletionItemProvider {
     const componentAsTagRange = doc.getWordRangeAtPosition(pos, edgeComponentsAsTagsCompletionRegex)
     if (componentAsTagRange) {
       const text = doc.getText(componentAsTagRange)
-      const items = indexer?.searchComponent(text)?.map(({ componentName, disk }) => {
-        return new SuperCompletionItem({
-          label: componentName!,
-          detail: disk,
-          kind: CompletionItemKind.Constructor,
+      indexer
+        ?.searchComponent(text)
+        ?.forEach(({ componentName, selfClosedInsertText, insertText, disk }) => {
+          if (selfClosingMatch) {
+            completionItems.push(
+              new SuperCompletionItem({
+                label: `!${componentName!}`,
+                detail: disk,
+                insertText: selfClosedInsertText,
+                kind: CompletionItemKind.Function,
+              })
+            )
+          } else {
+            completionItems.push(
+              new SuperCompletionItem({
+                label: componentName!,
+                detail: disk,
+                insertText,
+                kind: CompletionItemKind.Function,
+              })
+            )
+          }
         })
-      })
-
-      completionItems.push(...(items ?? []))
     }
 
     return completionItems

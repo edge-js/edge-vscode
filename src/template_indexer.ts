@@ -137,7 +137,15 @@ export class TemplateIndexer {
       const name = disk === 'default' ? filename : `${disk}::${filename}`
       const componentName = this.#componentFileNameToTagName(diskPath, path, disk)
 
-      return { path, name, disk, isComponent: !!componentName, componentName }
+      return {
+        path,
+        name,
+        disk,
+        isComponent: !!componentName,
+        componentName,
+        selfClosedInsertText: `${componentName}(\${1})`,
+        insertText: `${componentName}(\${1}) \n\t$0\n@end`,
+      }
     })
 
     return this.#templates

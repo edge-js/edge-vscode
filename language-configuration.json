@@ -19,7 +19,7 @@
   ],
   "folding": {
     "markers": {
-      "start": "^\\s*(@((?!let|eval|assign|include|includeIf|inject|newError)[a-zA-Z._]+)(\\s{0,2}))(\\()",
+      "start": "^\\s*(@((?!let|eval|assign|include|includeIf|inject|newError|svg)[a-zA-Z._]+)(\\s{0,2}))(\\()",
       "end": "^\\s*@end([a-zA-Z._]?)\\b"
     }
   },
