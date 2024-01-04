@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.4.0
+
+- Trigger autocompletion for components named as `layout` or `section`.
+- Fix component autocompletion insert text to contain closing statement as well.
+- Trigger components autocompletion when `@!` keywords are used.
+- Fix code comments shortcut to use Edge comment boundaries and not JavaScript comment boundaries.
+- Fix folding markers to ignore inline tag names.
+
 ## 1.3.2
 
 - Autocompletion was triggered when using `@section` in `.edge` files
