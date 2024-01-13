@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.0
+
+- Add `htmlLanguageParticipants` to use HTML language server features in Edge files.
+
 ## 1.4.0
 
 - Trigger autocompletion for components named as `layout` or `section`.
