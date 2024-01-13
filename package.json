@@ -31,7 +31,16 @@
   "activationEvents": [
     "workspaceContains:**/*.edge"
   ],
+  "extensionDependencies": [
+    "vscode.html-language-features"
+  ],
   "contributes": {
+    "htmlLanguageParticipants": [
+      {
+        "languageId": "edge",
+        "autoInsert": true
+      }
+    ],
     "languages": [
       {
         "id": "edge",
