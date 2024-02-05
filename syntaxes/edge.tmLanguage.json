@@ -3,7 +3,7 @@
 	"name": "Edge",
 	"scopeName": "text.html.edge",
   "injections": {
-    "text.html.edge - (meta.embedded | meta.tag | comment.block.edge), L:(text.html.edge meta.tag - (comment.block.edge | meta.embedded.block.edge)), L:(source.js.embedded.html - (comment.block.edge | meta.embedded.block.edge))": {
+    "text.html.edge - (meta.embedded | meta.tag | comment.block.edge), L:(text.html.edge meta.tag - (comment.block.edge | meta.embedded.block.edge)), L:(source.ts.embedded.html - (comment.block.edge | meta.embedded.block.edge))": {
       "patterns": [
         {
           "include": "#comment"
@@ -59,7 +59,7 @@
         "0": { "name": "punctuation.mustache.end" }
       },
       "name": "meta.embedded.block.javascript",
-      "patterns": [{ "include": "source.js#expression" }]
+      "patterns": [{ "include": "source.ts#expression" }]
 		},
     "mustache": {
       "begin": "\\{{",
@@ -71,7 +71,7 @@
         "0": { "name": "punctuation.mustache.end" }
       },
       "name": "meta.embedded.block.javascript",
-      "patterns": [{ "include": "source.js#expression" }]
+      "patterns": [{ "include": "source.ts#expression" }]
 		},
     "nonSeekableTag": {
       "match": "^(\\s*)((@{1,2})(!)?([a-zA-Z._]+))(~)?$",
@@ -79,7 +79,7 @@
         "2": { "name": "support.function.edge" }
       },
       "name": "meta.embedded.block.javascript",
-      "patterns": [{ "include": "source.js#expression" }]
+      "patterns": [{ "include": "source.ts#expression" }]
     },
     "tag": {
       "begin": "^(\\s*)((@{1,2})(!)?([a-zA-Z._]+)(\\s{0,2}))(\\()",
@@ -92,7 +92,7 @@
         "0": { "name": "punctuation.paren.close" }
       },
       "name": "meta.embedded.block.javascript",
-      "patterns": [{ "include": "source.js#expression" }]
+      "patterns": [{ "include": "source.ts#expression" }]
     }
 	},
 	"patterns": [
