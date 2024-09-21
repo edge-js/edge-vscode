@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.6.0
+
+- Add completions for `@stack`, `@pushTo`, `@pushOnceTo`, `@dd` and `@dump` tags.
+
 ## 1.5.0
 
 - Add `htmlLanguageParticipants` to use HTML language server features in Edge files.
