@@ -24,7 +24,7 @@ export const viewsCompletionRegex = /(?<=@include\(['"]|@layout\(['"]|@!componen
  * to suggest completions
  */
 export const edgeComponentsAsTagsCompletionRegex =
-  /@!?(?!include|includeIf|set|can|unless|svg|let|eval|inject|!component|if|elseif|else|vite|entryPointScripts|entryPointStyles|each|assign|debugger|component|slot|newError)(.+)?\(?/g
+  /@!?(?!include|includeIf|set|can|unless|svg|let|eval|inject|stack|dd|dump|pushTo|pushOnceTo|!component|if|elseif|else|vite|entryPointScripts|entryPointStyles|each|assign|debugger|component|slot|newError)(.+)?\(?/g
 
 /**
  * Check if we are currently inside a view link and capture the user input to suggest completions
