@@ -201,6 +201,56 @@ setItem.documentation = new MarkdownString(
 setItem.tags = [CompletionItemTag.Deprecated]
 setItem.detail = 'Deprecated in Edge 6'
 
+/**
+ * `@stack`
+ */
+const stackItem = new CompletionItem('stack', CompletionItemKind.Keyword)
+stackItem.insertText = new SnippetString('stack(${1:placeholder})')
+stackItem.documentation = new MarkdownString(
+  'Define a stack placeholder\n\nhttps://edgejs.dev/docs/stacks'
+)
+stackItem.detail = 'Stack placeholder'
+
+/**
+ * `@dd`
+ */
+const ddItem = new CompletionItem('dd', CompletionItemKind.Keyword)
+ddItem.insertText = new SnippetString('dd(${1:value})')
+ddItem.documentation = new MarkdownString(
+  'Dump value using dumper and die\n\nhttps://edgejs.dev/docs/stacks'
+)
+ddItem.detail = 'Dump die'
+
+/**
+ * `@dump`
+ */
+const dumpItem = new CompletionItem('dump', CompletionItemKind.Keyword)
+dumpItem.insertText = new SnippetString('dump(${1:value})')
+dumpItem.documentation = new MarkdownString(
+  'Dump value using dumper\n\nhttps://edgejs.dev/docs/stacks'
+)
+dumpItem.detail = 'Dump'
+
+/**
+ * `@pushOnceTo`
+ */
+const pushOnceItem = new CompletionItem('pushOnceTo', CompletionItemKind.Keyword)
+pushOnceItem.insertText = new SnippetString('pushOnceTo(${1:stackName})\n\t$0\n@end')
+pushOnceItem.documentation = new MarkdownString(
+  'Push item inside a named stack\n\nhttps://edgejs.dev/docs/stacks'
+)
+pushOnceItem.detail = 'Push once to stack'
+
+/**
+ * `@pushTo`
+ */
+const pushItem = new CompletionItem('pushTo', CompletionItemKind.Keyword)
+pushItem.insertText = new SnippetString('pushTo(${1:stackName})\n\t$0\n@end')
+pushItem.documentation = new MarkdownString(
+  'Push item inside a named stack\n\nhttps://edgejs.dev/docs/stacks'
+)
+pushItem.detail = 'Push to stack'
+
 export const builtinTags = [
   ifItem,
   elseIfItem,
@@ -220,6 +270,11 @@ export const builtinTags = [
   sectionItem,
   layoutItem,
   setItem,
+  stackItem,
+  ddItem,
+  dumpItem,
+  pushItem,
+  pushOnceItem,
 ]
 
 export const builtinSelfClosingTags = [selfClosingComponentItem]
