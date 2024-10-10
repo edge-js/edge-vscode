@@ -285,7 +285,7 @@ Following is the list of available snippets
       <code>vite</code>
     </td>
     <td>
-    <pre><code>@vite('TAB_STOP_1')<code></pre>
+    <pre><code>@vite('TAB_STOP_1')</code></pre>
     </td>
   </tr>
 </table>
