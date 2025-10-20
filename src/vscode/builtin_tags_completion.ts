@@ -152,7 +152,7 @@ debuggerItem.detail = 'Define debugger breakpoint'
  * `@let`
  */
 const letItem = new CompletionItem('let', CompletionItemKind.Keyword)
-letItem.insertText = new SnippetString('let ${1:variable} = ${2:value}')
+letItem.insertText = new SnippetString("let(${1:variable} = '${2:value}')")
 letItem.documentation = new MarkdownString(
   'Define a local variable\n\nhttps://edgejs.dev/docs/templates_state#inline-variables'
 )
