@@ -2,13 +2,14 @@
   "comments": {
     "blockComment": ["{{--", "--}}"]
   },
-  // symbols used as brackets
   "brackets": [
+    ["<!--", "-->"],
+    ["<", ">"],
+    ["{{", "}}"],
+    ["{{{", "}}}"],
     ["{", "}"],
-    ["[", "]"],
     ["(", ")"]
   ],
-  // symbols that are auto closed when typing
   "autoClosingPairs": [
     ["{", "}"],
     ["[", "]"],
@@ -17,17 +18,11 @@
     ["'", "'"],
     { "open": "{{!--", "close": "--}}", "notIn": ["comment"] }
   ],
-  "folding": {
-    "markers": {
-      "start": "^\\s*(@((?!let|eval|assign|include|includeIf|inject|newError|svg)[a-zA-Z._]+)(\\s{0,2}))(\\()",
-      "end": "^\\s*@end([a-zA-Z._]?)\\b"
-    }
-  },
-  // symbols that can be used to surround a selection
   "surroundingPairs": [
     ["{", "}"],
     ["[", "]"],
     ["(", ")"],
+    { "open": "<", "close": ">" },
     { "open": "\"", "close": "\"", "notIn": ["string"] },
     { "open": "'", "close": "'", "notIn": ["string", "comment"] }
   ],
@@ -35,29 +30,22 @@
   "onEnterRules": [
     {
       "beforeText": {
-        "pattern": "<(?!(?:area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr))([_:\\w][_:\\w-.\\d]*)(?:(?:[^'\"/>]|\"[^\"]*\"|'[^']*')*?(?!\\/)>)[^<]*$",
+        "pattern": "<(?!(?:area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr))([_:\\w][_:\\w-.\\d]*)([^/>]*(?!\\/)>)[^<]*$",
         "flags": "i"
       },
-      "afterText": {
-        "pattern": "^<\\/([_:\\w][_:\\w-.\\d]*)\\s*>",
-        "flags": "i"
-      },
+      "afterText": { "pattern": "^<\\/([_:\\w][_:\\w-.\\d]*)\\s*>", "flags": "i" },
       "action": {
         "indent": "indentOutdent"
       }
     },
     {
       "beforeText": {
-        "pattern": "<(?!(?:area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr))([_:\\w][_:\\w-.\\d]*)(?:(?:[^'\"/>]|\"[^\"]*\"|'[^']*')*?(?!\\/)>)[^<]*$",
+        "pattern": "<(?!(?:area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr))(\\w[\\w\\d]*)([^/>]*(?!\\/)>)[^<]*$",
         "flags": "i"
       },
       "action": {
         "indent": "indent"
       }
     }
-  ],
-  "indentationRules": {
-    "increaseIndentPattern": "<(?!\\?|(?:area|base|br|col|frame|hr|html|img|input|keygen|link|menuitem|meta|param|source|track|wbr)\\b|[^>]*\\/>)([-_\\.A-Za-z0-9]+)(?=\\s|>)\\b[^>]*>(?!.*<\\/\\1>)|<!--(?!.*-->)|\\{[^}\"']*$",
-    "decreaseIndentPattern": "^\\s*(<\\/(?!html)[-_\\.A-Za-z0-9]+\\b[^>]*>|-->|\\})"
-  }
+  ]
 }
